@@ -41,7 +41,7 @@ Cmake Generate
 ```
 ninja Build
 ```bash
-    ninja
+    make
 ```
 Run the executeable
 
