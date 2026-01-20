@@ -1,4 +1,5 @@
 #include<iostream>
+#include<bitset>
 #include "files.h"
 using namespace std;
 
@@ -19,6 +20,20 @@ int main()
         h.decodedData = f.data;
         encodedFile.push_back(std::move(h));
     }
+
+    const auto& files = inputFile.getFiles();
+    if(!files.empty()){
+        int lcount=0;
+        const auto& bytes = files.front().data;
+        for(int i=0; i< bytes.size();i++){
+            if(++lcount == 16){
+                lcount=0;
+                cout <<endl;
+            } 
+            cout << bitset<4>(bytes[i])<<"\t";
+        }
+    }
+
 
     inputFile.saveCompressed("file/output", encodedFile, false);
 
