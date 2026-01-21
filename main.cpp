@@ -1,6 +1,7 @@
 #include<iostream>
 #include<bitset>
 #include "files.h"
+#include <map>
 using namespace std;
 
 int main()
@@ -20,17 +21,21 @@ int main()
         h.decodedData = f.data;
         encodedFile.push_back(std::move(h));
     }
+    map<uint8_t, int> HuffmanTable;
 
     const auto& files = inputFile.getFiles();
     if(!files.empty()){
-        int lcount=0;
         const auto& bytes = files.front().data;
         for(int i=0; i< bytes.size();i++){
-            if(++lcount == 16){
-                lcount=0;
-                cout <<endl;
-            } 
-            cout << bitset<4>(bytes[i])<<"\t";
+            HuffmanTable[bytes[i]]++;
+        } 
+    }
+
+    cout <<"HUFFMAN ENCODED TABLE" <<endl;
+    cout <<"DATA\tFrequency" <<endl;
+    for(int i=0;i<256;i++){
+        if(HuffmanTable[i] > 0){
+            cout << static_cast<char>(i) <<"\t"<< HuffmanTable[i]<<endl;
         }
     }
 
