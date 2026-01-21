@@ -4,6 +4,7 @@
 #include <vector>
 #include <cstdint>
 #include <string>
+#include <map>
 
 /* -----------------------------------------------------------
    Raw file loaded from disk (before Huffman encoding)
@@ -20,7 +21,7 @@ struct FileData {
 struct HuffmanData {
     std::string fileName;              // Original file name
     std::string fileExtension;         // Original file extension
-    std::vector<uint8_t> encodeTable;  // Serialized Huffman table
+    std::map<uint8_t, int> encodeTable;  // Serialized Huffman table
     std::vector<uint8_t> encodedData;  // Huffman-compressed bitstream
     std::vector<uint8_t> decodedData;  // Decoded original file bytes
 };

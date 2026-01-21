@@ -130,10 +130,10 @@ void FileIO::saveCompressed(
 
         // Write Huffman table
         output.write(reinterpret_cast<const char*>(&tableSz), sizeof(tableSz));
-        output.write(
-            reinterpret_cast<const char*>(f.encodeTable.data()),
-            tableSz
-        );
+        for(const auto& entry : f.encodeTable){
+            output.write(reinterpret_cast<const char*>(&entry.first), sizeof(entry.first));
+            output.write(reinterpret_cast<const char*>(&entry.second), sizeof(entry.second));
+        }
 
         // Write encoded bitstream
         output.write(reinterpret_cast<const char*>(&dataSz), sizeof(dataSz));
